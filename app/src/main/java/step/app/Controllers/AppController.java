@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,6 +26,7 @@ import models.Welcome;
 import models.commonRequest;
 
 @RestController
+@RequestMapping("api/v1/problems")
 public class AppController {
 	
 	@GetMapping("/")
@@ -66,12 +68,12 @@ public class AppController {
 		if(request.getMethod().equals("POST"))
 			{Welcome err = new Welcome("ERROR _ MESSAGE here");
 			return new ResponseEntity<Welcome>(err,HttpStatus.BAD_REQUEST);
-			}
+			}//Post method incorrect header value type
 		
 		else {
 			Welcome err = new Welcome("Value is not numeric");
 			return new ResponseEntity<Welcome>(err, HttpStatus.BAD_REQUEST);
-		}
+		}//Delete method incorrect path variable type
 	
 	
 	} //Display custom error message for parameters of the wrong type
@@ -81,6 +83,8 @@ public class AppController {
 	ResponseEntity<?> missingHandler(Exception exception, HttpServletRequest request){
 			Welcome err = new Welcome("ERROR _ MESSAGE here");
 			return new ResponseEntity<Welcome>(err,HttpStatus.BAD_REQUEST);
-	} //Display custom error message for missing parameters.
+	} //Display custom error message for missing header parameters.
+	
+
 
 }
