@@ -37,6 +37,7 @@ public class AppController {
 	
 	@PostMapping("/")
 	public ResponseEntity<?> postControl(@RequestHeader Boolean TO_UpperCase, @RequestBody commonRequest cred){
+		if(TO_UpperCase == null) return new ResponseEntity<String>("TO_UpperCase should not be null",HttpStatus.BAD_REQUEST);
 		if(TO_UpperCase) {
 			commonRequest res = new commonRequest(cred.getfName().toUpperCase(),cred.getTitle().toUpperCase());
 			return new ResponseEntity<commonRequest>(res,HttpStatus.OK);
